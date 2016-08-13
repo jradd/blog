@@ -70,7 +70,7 @@ def blog_post(url_slug):
 		for item in metadata:
 			# Search for metadata of the blogpost with that url
 			if item['url'] == url_slug:
-				bp += item
+				bp = item
 	except Exception as e:
 		# No such blogpost
 		return redirect(url_for('index_page'))

@@ -8,6 +8,7 @@ import time
 # Global Config
 DATA_DIR = GIT_REPO_DIR_NAME
 FILE_DOT_MD_REGEX = ACCEPTED_FILE_FORMATS
+
 """
 	Class to access data
 """
@@ -31,7 +32,7 @@ class DataStore(object):
 			# safegaurd to load only *.md files
 			if re.match(FILE_DOT_MD_REGEX,f) is not None:
 				# Read each file and save it's content in a dict with key as filename and value as content
-				with open(DATA_DIR+"/"+f) as fp:
+				with open(DATA_DIR + "/" + f) as fp:
 						key = f.replace(".md","")
 						value = fp.read()
 						data[key] = value
@@ -42,7 +43,7 @@ class DataStore(object):
 		Rule, the filename must match the key in metadata
 	"""
 	def load_metadata(self):
-		with open(DATA_DIR+"/"+"metadata.json","r") as fp:
+		with open(DATA_DIR + "/" + "metadata.json", "r") as fp:
 			parsed_data = json.load(fp)
 		self.metadata = parsed_data
 

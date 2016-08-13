@@ -1,6 +1,7 @@
 import subprocess
 import os
 from config import *
+import sys
 
 """
 	Update the GIT database repo
@@ -14,7 +15,7 @@ def git_update():
 			if current_dir != GIT_REPO_DIR_NAME:
 				print("Changing directory")
 				os.chdir(GIT_REPO_DIR_NAME)
-			proc = subprocess.run(['git','pull'])
+			proc = subprocess.Popen(['git', 'pull'], stderr=subprocess.STDOUT)
 			# Sleeps for 10 secs, waits till the pull is completed
 			# time.sleep(10)
 		else:
@@ -37,7 +38,7 @@ def get_current_dir():
 def git_clone():
 	try:
 		os.chdir(GIT_REPO_DIR_NAME)
-		proc = subprocess.run(['git','clone',GIT_REPO_URL])
+		proc = subprocess.Popen(['git', 'clone', GIT_REPO_URL], stderr=subprocess.STDOUT)
 	except Exception as e:
 		raise e
 	finally:
@@ -60,7 +61,7 @@ def check_repo_exist():
 		if current_dir == GIT_REPO_DIR_NAME:
 			repo_exists = True
 		if repo_exists == False:
-			proc = subprocess.run(['git','clone',GIT_REPO_URL])
+			proc = subprocess.Popen(['git','clone',GIT_REPO_URL])
 	except Exception as e:
 		raise
 	finally:
